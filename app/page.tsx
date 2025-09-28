@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
         Welcome to Next.js Inter Font
       </h1>
       <h1 className="h1-bold font-space-grotesk">Welcome to Next.js Grotesk</h1>
+      <Image src="/images/logo.png" alt="Site Logo" width={100} height={100} />
     </div>
   );
 };

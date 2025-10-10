@@ -10,8 +10,7 @@ const Home = async () => {
 
   return (
     <>
-      <h1>Welcome to the world of next js</h1>
-     
+      <h1 className="text-light-800">Welcome to the world of next js</h1>
     </>
   );
 };

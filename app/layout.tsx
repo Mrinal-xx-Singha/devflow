@@ -38,6 +38,14 @@ export default async function RootLayout({
   //  suppress Hydration warning to prevent hydration mismatch error due to theme change
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* devicon integration */}
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+        />
+      </head>
       <SessionProvider session={session}>
         <body
           className={`${inter.className}  ${spaceGrotesk.variable} antialiased`}

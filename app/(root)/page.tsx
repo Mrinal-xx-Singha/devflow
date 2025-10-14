@@ -1,10 +1,15 @@
+import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
 import Link from "next/link";
 import React from "react";
 
-const Home = async () => {
+interface SearchParams {
+  searchParams: Promise<{ [key: string]: string }>;
+}
+
+const Home = async ({ searchParams }: SearchParams) => {
   return (
     <>
       <section className="flex w-full flex-col-reverse sm:flex-row justify-between gap-4 sm:items-center">
@@ -26,7 +31,8 @@ const Home = async () => {
           otherClasses="flex-1"
         />
       </search>
-      HomeFilter
+      {/* Home filter component */}
+      <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
         <p>Question Card 1</p>
         <p>Question Card 2</p>

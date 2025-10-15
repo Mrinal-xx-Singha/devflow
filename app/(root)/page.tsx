@@ -1,3 +1,4 @@
+import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
@@ -8,8 +9,51 @@ import React from "react";
 interface SearchParams {
   searchParams: Promise<{ [key: string]: string }>;
 }
+const questions = [
+  {
+    _id: "1",
+    title: "How to learn React ?",
+    description: "I want to learn React, can anyone help me ?",
+    tags: [
+      { _id: "1", name: "React" },
+      { _id: "2", name: "Javascript" },
+    ],
+    author: {
+      _id: "1",
+      name: "John Doe",
+      image: "https://images.unsplash.com/photo-1474176857210-7287d38d27c6",
+    },
+    upVotes: 10,
+    answers: 5,
+    views: 100,
+    createdAt: new Date("2023-10-01"),
+  },
+  {
+    _id: "2",
+    title: "How to learn Javascript ?",
+    description: "I want to learn Javascript, can anyone help me ?",
+    tags: [
+      { _id: "1", name: "React" },
+      { _id: "2", name: "Javascript" },
+    ],
+    author: {
+      _id: "1",
+      name: "John Doe",
+      image: "https://images.unsplash.com/photo-1474176857210-7287d38d27c6",
+    },
+    upVotes: 10,
+    answers: 5,
+    views: 100,
+    createdAt: new Date("2023-09-15"),
+  },
+];
 
 const Home = async ({ searchParams }: SearchParams) => {
+  const { query = "" } = await searchParams;
+  const filteredQuestions = questions.filter((question) =>
+    question.title.toLowerCase().includes(query?.toLowerCase())
+  );
+
   return (
     <>
       <section className="flex w-full flex-col-reverse sm:flex-row justify-between gap-4 sm:items-center">
@@ -34,10 +78,9 @@ const Home = async ({ searchParams }: SearchParams) => {
       {/* Home filter component */}
       <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
-        <p>Question Card 1</p>
-        <p>Question Card 2</p>
-        <p>Question Card 3</p>
-        <p>Question Card 4</p>
+        {filteredQuestions.map((question) => (
+          <QuestionCard key={question._id} question={question} />
+        ))}
       </div>
     </>
   );

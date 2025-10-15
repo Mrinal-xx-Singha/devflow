@@ -18,9 +18,11 @@ const filters = [
 const HomeFilter = () => {
   const router = useRouter();
 
-  //
+  // read the current url search parameter 
   const searchParams = useSearchParams();
+  // getting the key named filter 
   const filterParams = searchParams.get("filter");
+  // initial value of active state is the url  or "" if the url is not present
   const [active, setActive] = useState(filterParams || "");
 
   const handleTypeClick = (filter: string) => {
@@ -48,7 +50,8 @@ const HomeFilter = () => {
   return (
     <div className="mt-10 hidden flex-wrap gap-3 sm:flex">
       {filters.map((filter) => (
-        <Button
+      //  applying the active filter if the active url is the filter value tracking the click event
+       <Button
           className={cn(
             `body-medium rounded-lg px-6 py-3
          capitalize shadow-none`,

@@ -1,13 +1,14 @@
 // centralised place to redirect routes
 // prevent typo
 // profile route dynamic
-// dynamic routes created for profile and tags reusable 
+// dynamic routes created for profile and tags reusable
 const ROUTES = {
   HOME: "/",
   SIGN_IN: "/sign-in",
   SIGN_UP: "/sign-up",
-  ASK_QUESTION:"ask-question",
+  ASK_QUESTION: "ask-question",
+  QUESTION: (id: string) => `/question/${id}`,
   PROFILE: (id: string) => `/profile/${id}`,
-  TAGS:(id:string) =>`/tags/${id}`
+  TAGS: (id: string) => `/tags/${id}`,
 };
 export default ROUTES;

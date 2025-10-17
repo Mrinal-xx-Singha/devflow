@@ -1,7 +1,7 @@
 "use client";
 import { AskQuestionSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -12,8 +12,16 @@ import {
   FormMessage,
   FormDescription,
 } from "../ui/form";
+import { type MDXEditorMethods } from "@mdxeditor/editor";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("@/components/editor"), {
+  // Make sure we turn SSR off
+  ssr: false,
+});
+
 const QuestionForm = () => {
   const form = useForm({
     resolver: zodResolver(AskQuestionSchema),
@@ -25,6 +33,8 @@ const QuestionForm = () => {
   });
 
   const handleCreateQuestion = () => {};
+
+  const editorRef = useRef<MDXEditorMethods>(null);
   return (
     <Form {...form}>
       <form
@@ -62,7 +72,14 @@ const QuestionForm = () => {
                 Detailed explanation of your problem{" "}
                 <span className="text-primary-500">*</span>
               </FormLabel>
-              <FormControl>Editor</FormControl>
+              <FormControl>
+                {/* Editor component */}
+                <Editor
+                  value={field.value}
+                  fieldChange={field.onChange}
+                  editorRef={editorRef}
+                />
+              </FormControl>
               <FormDescription className="body-regular text-light-500 mt-2.5">
                 Inroduce the problem and expand on what you put in the title.
               </FormDescription>
@@ -76,7 +93,7 @@ const QuestionForm = () => {
           render={({ field }) => (
             <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="paragraph-medium text-dark400_light700">
-                Question Title<span className="text-primary-500">*</span>
+                Tags<span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
                 <div>
